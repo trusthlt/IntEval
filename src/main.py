@@ -25,10 +25,25 @@ from llmj import LLMJudge
 import setproctitle
 import pandas as pd
 
+import pickle
+
+from datasets import Dataset, load_dataset
+
+def pushing_to_hub():
+    ecthr_data = pickle.load(open('../data/dataset/ECtHR_dataset.pickle', 'rb'))
+    dataset = Dataset.from_pandas(ecthr_data)
+    input(dataset)
+    dataset.to_parquet('../data/dataset/ecthr_dataset.parquet')
+    input('check')
+    # dataset.push_to_hub('NamazovMN/ECtHR_dataset', private=True)
+    # input('check')
+    # input(ecthr_data)
 
 def __main__():
     parameters = get_parameters()
     setproctitle.setproctitle(parameters['process_name'])
+
+    pushing_to_hub()
     config_obj = Configuration(parameters)
 
     ds_obj = VioSet(parameters, config_obj, split='train')
