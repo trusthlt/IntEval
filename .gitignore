@@ -1,0 +1,9 @@
+.DS_Store
+# PyCharm
+.idea/
+*.iml
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
